@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
+import slugify from 'slugify';
 
 export interface IBootcamp extends Document {
     name: string;
@@ -125,6 +126,12 @@ const BootcampSchema = new Schema({
         type: Date,
         default: Date.now,
     },
+});
+
+// add slug
+BootcampSchema.pre<IBootcamp>('save', function (next) {
+    this.slug = slugify(this.name, { lower: true });
+    next();
 });
 
 export default mongoose.model<IBootcamp>('Bootcamp', BootcampSchema);

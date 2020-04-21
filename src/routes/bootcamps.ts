@@ -6,17 +6,17 @@ import {
     deleteBootcamp,
     updateBootcamp,
 } from '../controllers/bootcampController';
+import { asyncHandler } from '../middleware/asyncHandler';
 
 const router = express.Router();
 
-// TODO wrap in ErrorHandler for async/await error
-router.get('/', getBootcamps);
-router.get('/:id', getBootcamp);
+router.get('/', asyncHandler(getBootcamps));
+router.get('/:id', asyncHandler(getBootcamp));
 
-router.post('/', createBootcamp);
+router.post('/', asyncHandler(createBootcamp));
 
-router.put('/:id', updateBootcamp);
+router.put('/:id', asyncHandler(updateBootcamp));
 
-router.delete('/:id', deleteBootcamp);
+router.delete('/:id', asyncHandler(deleteBootcamp));
 
 export default router;
