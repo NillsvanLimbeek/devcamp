@@ -8,8 +8,15 @@ import {
 } from '../controllers/bootcampController';
 import { asyncHandler } from '../middleware/asyncHandler';
 
+// rescourse router
+import courseRouter from './courses';
+
 const router = express.Router();
 
+// redirect to other resource routers
+router.use('/:bootcampId/courses', courseRouter);
+
+// bootcamp routes
 router.get('/', asyncHandler(getBootcamps));
 router.get('/:id', asyncHandler(getBootcamp));
 
