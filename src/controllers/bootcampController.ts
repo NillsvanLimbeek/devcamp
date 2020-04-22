@@ -17,7 +17,7 @@ async function getBootcamps(req: Request, res: Response, next: NextFunction) {
         /\b(gt|gte|lt|lte|in)\b/g,
         (match) => `$${match}`,
     );
-    query = Bootcamp.find(JSON.parse(queryStr));
+    query = Bootcamp.find(JSON.parse(queryStr)).populate('courses');
 
     // select fields
     if (req.query.select) {
