@@ -103,9 +103,11 @@ async function updateBootcamp(req: Request, res: Response, next: NextFunction) {
 }
 
 async function deleteBootcamp(req: Request, res: Response, next: NextFunction) {
-    const bootcamp = await Bootcamp.findByIdAndDelete(req.params.id);
+    const bootcamp = await Bootcamp.findById(req.params.id);
 
     if (!bootcamp) return res.status(400).json({ succes: false });
+
+    bootcamp.remove();
 
     res.status(200).json({ succes: true, data: {} });
 }
